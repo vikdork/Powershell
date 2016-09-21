@@ -1,0 +1,14 @@
+\\srv-fil02\ksf$\viklin\visual studio 2013\Projects\create_wiki_text\create_wiki_text\bin\Debug\create_wiki_text.exe.config
+C:\Users\Viktor\OneDrive\powershell\create_wiki_text\create_wiki_text\bin\Debug\create_wiki_text.exe.config
+C:\Users\Viktor\OneDrive\powershell\create_wiki_text\create_wiki_text\bin\Debug\create_wiki_text.exe
+C:\Users\Viktor\OneDrive\powershell\create_wiki_text\create_wiki_text\bin\Debug\create_wiki_text.pdb
+C:\Users\Viktor\OneDrive\powershell\create_wiki_text\create_wiki_text\obj\Debug\create_wiki_text.csprojResolveAssemblyReference.cache
+C:\Users\Viktor\OneDrive\powershell\create_wiki_text\create_wiki_text\obj\Debug\MainWindow.baml
+C:\Users\Viktor\OneDrive\powershell\create_wiki_text\create_wiki_text\obj\Debug\MainWindow.g.cs
+C:\Users\Viktor\OneDrive\powershell\create_wiki_text\create_wiki_text\obj\Debug\App.g.cs
+C:\Users\Viktor\OneDrive\powershell\create_wiki_text\create_wiki_text\obj\Debug\create_wiki_text_MarkupCompile.cache
+C:\Users\Viktor\OneDrive\powershell\create_wiki_text\create_wiki_text\obj\Debug\create_wiki_text.g.resources
+C:\Users\Viktor\OneDrive\powershell\create_wiki_text\create_wiki_text\obj\Debug\create_wiki_text.Properties.Resources.resources
+C:\Users\Viktor\OneDrive\powershell\create_wiki_text\create_wiki_text\obj\Debug\create_wiki_text.csproj.GenerateResource.Cache
+C:\Users\Viktor\OneDrive\powershell\create_wiki_text\create_wiki_text\obj\Debug\create_wiki_text.exe
+C:\Users\Viktor\OneDrive\powershell\create_wiki_text\create_wiki_text\obj\Debug\create_wiki_text.pdb

@@ -1,0 +1,19 @@
+﻿# Kopplar upp mot Azure ad, man behöver en Global administrator account
+Connect-MsolService
+$domain = "huddinge.se"
+$Brandname = "Huddinge Kommun"
+$logOnrUrl = "https://365.huddinge.se/wa/auth/saml/"
+$logOffUrl = "https://365.huddinge.se/wa/_prelogout.html"
+$metaDataUri = "https://365.huddinge.se/365_huddinge_se.xml"
+# Vi var tvungna att lägga certet på samma rad för när vi klippte in det som vanligt så verkade det som att powershell tolkade radbrytning fel.
+$Cert = "MIIFRTCCBC2gAwIBAgISESHb7c2qMIx4f8igQDx8JB5fMA0GCSqGSIb3DQEBCwUAMGYxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMTwwOgYDVQQDEzNHbG9iYWxTaWduIE9yZ2FuaXphdGlvbiBWYWxpZGF0aW9uIENBIC0gU0hBMjU2IC0gRzIwHhcNMTUxMDI3MTEwMjQ5WhcNMTgxMDI3MTEwMjQ5WjBzMQswCQYDVQQGEwJTRTESMBAGA1UECBMJU3RvY2tob2xtMREwDwYDVQQHEwhIdWRkaW5nZTELMAkGA1UECxMCSVQxGDAWBgNVBAoTD0h1ZGRpbmdlIGtvbW11bjEWMBQGA1UEAwwNKi5odWRkaW5nZS5zZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALxHhK6PQ8/CFdm1Z6kJXdRPjw4dGuY8RNNZdFkvvp9yojcM4JujpDQ+vvf0KWPPZk+aFFEO1WWe5UzL5ay7HIO1AmiSEqonB6MuVgbS3IIePQrzrzdhnLU0MzdZky49yCsiM7v2oeAqa9G62fDZwOz6cai1WEgJnlSL8jKZP/bihnUfzC+Z7EBNyI1EPfp23u85lohtArw7SNMJlz+bL+Vymy+5uR1WMb/wavv91VbukedmLzBZHO8WVwVejktzvNAmchMO9iK8kdIjwEPncHCV+bzbqwo/4zo+U2xLxJVoF4f8XKIJQQQkk2ora8Yv87buaW+HeZ4qfWjMw38gaf8CAwEAAaOCAd4wggHaMA4GA1UdDwEB/wQEAwIFoDBJBgNVHSAEQjBAMD4GBmeBDAECAjA0MDIGCCsGAQUFBwIBFiZodHRwczovL3d3dy5nbG9iYWxzaWduLmNvbS9yZXBvc2l0b3J5LzAlBgNVHREEHjAcgg0qLmh1ZGRpbmdlLnNlggtodWRkaW5nZS5zZTAJBgNVHRMEAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjBJBgNVHR8EQjBAMD6gPKA6hjhodHRwOi8vY3JsLmdsb2JhbHNpZ24uY29tL2dzL2dzb3JnYW5pemF0aW9udmFsc2hhMmcyLmNybDCBoAYIKwYBBQUHAQEEgZMwgZAwTQYIKwYBBQUHMAKGQWh0dHA6Ly9zZWN1cmUuZ2xvYmFsc2lnbi5jb20vY2FjZXJ0L2dzb3JnYW5pemF0aW9udmFsc2hhMmcycjEuY3J0MD8GCCsGAQUFBzABhjNodHRwOi8vb2NzcDIuZ2xvYmFsc2lnbi5jb20vZ3Nvcmdhbml6YXRpb252YWxzaGEyZzIwHQYDVR0OBBYEFJczBSGuWpTKTXHRKpDNv/NfYKoYMB8GA1UdIwQYMBaAFJbeYfG9HBYpUxzAzH07gwBA5hp8MA0GCSqGSIb3DQEBCwUAA4IBAQA0bwkBS4AIRI3tDn9uoQpa1dxWHEO0rJAvObGuXpfw+tno0DDkUlDaOwS6gX146GHDZjrK46e/VGLScB/8wOU/c4Q9wk0kS13e2IjddsrgG3ACVg15ioiWjYi81PFLhfsb6Gzn98P9gQuyxXAhCbQq7ud+7Zcj+5iRyZzf3HeNMeOxatmMlCbsHIy/nsL3rgwMbsU5B57f7oM7pqzHT8La6goxogbtQITxZe1MT+FYo7ET+d9srL5fdcI0Li8rxPbDBFuyr91zj6YvDnktnA4iK+phet/Tx1Osrt4+xZONxbfO47p4pORpcNg16Gq6Mg8nd6CtYz3urfDP+CEfZvOg"
+$issuerUri = "https://365.huddinge.se/idp"
+$Prot = "SAMLP"
+# Det här kommandot sätter vårat Azure AD i icke federerat läge, vilket verkar krävas för att man sen ska kunna sätta konfigureringar i federation mode.
+Set-MsolDomainAuthentication -DomainName huddinge.se -Authentication Managed
+# Sätter vårat Azure i federerat läge med konfiguration enligt variablerna.
+Set-MsolDomainAuthentication -DomainName $domain -FederationBrandName $Brandname -Authentication Federated -PassiveLogOnUri $logOnrUrl -ActiveLogOnUri $logOnrUrl -MetadataExchangeUri $metaDataUri  -IssuerUri $issuerUri -LogOffUri $logOffUrl -PreferredAuthenticationProtocol $Prot -SigningCertificate $Cert
+# Visar satt konfig, koontrollera så att det stämmer mot varibalerna.
+Get-MsolDomainFederationSettings -DomainName huddinge.se | select *
+
+

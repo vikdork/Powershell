@@ -1,0 +1,14 @@
+﻿<Window x:Class="create_wiki_text.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="502" Width="573">
+    <Grid>
+        <ListBox x:Name="listboxServices" HorizontalAlignment="Left" Height="409" Margin="394,34,0,0" VerticalAlignment="Top" Width="149"/>
+        <Label x:Name="labelComputername" Content="Computername" HorizontalAlignment="Left" Margin="40,41,0,0" VerticalAlignment="Top" Height="27" Width="99"/>
+        <TextBox x:Name="textBoxComputerName" HorizontalAlignment="Left" Height="23" Margin="199,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177"/>
+        <Button x:Name="buttonGetServices" Content="Get Services" HorizontalAlignment="Left" Margin="40,88,0,0" VerticalAlignment="Top" Width="131" Height="24"/>
+        <Button x:Name="buttonCreateWiki" Content="Create Wikitext" HorizontalAlignment="Left" Margin="40,133,0,0" VerticalAlignment="Top" Width="131" Height="25"/>
+        <CheckBox x:Name="checkBoxServices" Content="Show all services" HorizontalAlignment="Left" Margin="199,93,0,0" VerticalAlignment="Top" Width="137"/>
+
+    </Grid>
+</Window>
