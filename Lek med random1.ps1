@@ -1,6 +1,6 @@
 ﻿Measure-Command {
 
-$maximum = 101
+$maximum = 11
 $minimum = 1
 
 $maxMini = $maximum..$minimum
@@ -52,5 +52,6 @@ $result += New-Object psobject -Property @{
     9 = $9
     10 = $10
     }
-$result
+
     }
+    $result
