@@ -1,4 +1,4 @@
-﻿function Get-Mobile 
+﻿function Get-UserFromMobile 
 {
     [CmdletBinding()]
     param
@@ -17,7 +17,7 @@
             else
             {write-host "Något blev fel det fans flera anändare och dessa är $($user.name)"}
     }
-Get-Mobile -mobileNumber 0709750555
+Get-UserFromMobile -mobileNumber 0709750555
 $mobileNumber = "0709750555"
 #$cred = Get-Credential
 
