@@ -8,7 +8,7 @@ $result = @()
 for ($i = 0; $i -lt 20000; $i++)
 { 
      $SONNY = Get-Random -Minimum $minimum -Maximum $maximum
-     $result + 
+     $result
 
    }
    

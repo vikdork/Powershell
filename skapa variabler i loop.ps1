@@ -7,7 +7,7 @@ $allvar = @()
 foreach ($item in $maxMini)
 {
 $name = "$" + $item
-    Set-Variable -Name $item -Value 0 -Visibility Public
+    Set-Variable -Name $item -Value $item -Visibility Public
 
     $allvar += $name
 }
