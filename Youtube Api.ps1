@@ -25,7 +25,7 @@ $body = @{
 	client_id=$clientId;
 	client_secret=$clientSecret;
 	redirect_uri=$redirectUrl;
-	grant_type='authorization_code'; # Fixed value
+	grant_type="authorization_code"; # Fixed value
 };
  
 $tokens = Invoke-RestMethod -Uri $requestUri -Method POST -Body $body -Verbose 
@@ -35,5 +35,3 @@ Set-Content $PSScriptRoot"\refreshToken.txt" $tokens.refresh_token
  
 # Store accessToken
 Set-Content $PSScriptRoot"\accessToken.txt" $tokens.access_token
-
-
