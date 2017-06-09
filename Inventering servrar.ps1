@@ -21,17 +21,6 @@ function Get-StaticRoutes {
                 Remove-Variable route
                }
 
-
-
-# $cred = Get-Credential    
-# Om man vill lägga in så dest och mask i CIDR.
-
-<#$Mask = $routes.Mask.Split(".")
-
-$val = 0
-$mask | foreach-object {$val = $val * 256 + [Convert]::ToInt64($_)}
-$ip + "/" + [Convert]::ToString($val,2).IndexOf('0')
-#>
 ################################################################################################################################################
 
 $Global:allLocalUsers = @()
@@ -57,7 +46,7 @@ function Get-LocalAccounts
         [String[]]$Computername
     )
       Process  {Write-Host "testar $($Computername)"
-        $getAllUsers = Get-WmiObject -Class "Win32_UserAccount" -Filter "LocalAccount='True'" -ComputerName $Computername
+        $getAllUsers = Get-WmiObject -Class "Win32_UserAccount" -Filter "LocalAccount='True'" -ComputerName $Computername -Credential $cred
             
             foreach ($user in $getAllUsers) {
                      $Global:allLocalUsers += [pscustomobject]@{
