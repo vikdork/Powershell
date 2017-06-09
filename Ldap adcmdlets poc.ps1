@@ -10,4 +10,4 @@ $base = "DC=huddfed,DC=adlds"
 $test = Get-ADobject -Credential $cred -Filter 'name -eq "abdal30"'  -Server ($server + ":389") -SearchBase $base -Properties *
 
 Get-ADGroupMember -Credential $cred -Identity $test.DistinguishedName -Server ($server + ":389")
-CN=antarv,OU=Std,OU=Users,OU=KSF,OU=Förvaltningar,OU=Data,DC=huddfed,DC=adlds
+"CN=antarv,OU=Std,OU=Users,OU=KSF,OU=Förvaltningar,OU=Data,DC=huddfed,DC=adlds"

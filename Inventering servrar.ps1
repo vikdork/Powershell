@@ -34,6 +34,44 @@ $ip + "/" + [Convert]::ToString($val,2).IndexOf('0')
 #>
 ################################################################################################################################################
 
-
+$Global:allLocalUsers = @()
+<#
+.Synopsis
+   Get all local users from computers
+.DESCRIPTION
+   
+.EXAMPLE
+   Get-LocalAccounts -Computername "srv-hej01", "srv-hej02"
+.EXAMPLE
+   (get-adcomputer -Filter 'name -like "srv-*"').name | Get-LocalAccounts
+#>
+function Get-LocalAccounts
+{
+    [CmdletBinding()]
+    
+    
+    Param
+    (
+        # Param1 help description
+        [parameter(ValueFromPipeline)]
+        [String[]]$Computername
+    )
+      Process  {Write-Host "testar $($Computername)"
+        $getAllUsers = Get-WmiObject -Class "Win32_UserAccount" -Filter "LocalAccount='True'" -ComputerName $Computername
+            
+            foreach ($user in $getAllUsers) {
+                     $Global:allLocalUsers += [pscustomobject]@{
+                        computername = $user.PSComputername
+                        Name = $User.Name
+                        Description = $user.Description
+                        
+                       
+                    }
+                    
+          
+          }
+    }
+}
+#################################################################################################################
 
                
