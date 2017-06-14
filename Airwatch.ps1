@@ -26,6 +26,10 @@ Function Get-BasicUserForAuth {
 
 	Return "Basic " + $encodedString
 }
+ $Username = "MeetingsAPI"
+    $Password = "kallebanan01"
+    $APIkey = "YNF9Pz9Frh2C1OKBQEDeEDzojC31sgxalHOa4zTGVXg="
+
 
 $header = @{"Authorization" = (Get-BasicUserForAuth ($Username + ":" + $Password)); "aw-tenant-code" = $APIkey; "Accept" = "application/json"; "Content-Type" = "application/json"}
 
@@ -45,16 +49,16 @@ $header = @{"Authorization" = (Get-BasicUserForAuth ($Username + ":" + $Password
     $device03 = "5966"
     #>
 
-    $Username = "MeetingsAPI"
-    $Password = "kallebanan01"
-    $APIkey = "YNF9Pz9Frh2C1OKBQEDeEDzojC31sgxalHOa4zTGVXg="
-    # Gamla test för att hämta alla devices och apps
+   
+    # Gamla test fï¿½r att hï¿½mta alla devices och apps
     # $webRequestApps = Invoke-WebRequest -Uri $hostUrlTestApp -Headers $header -Method GET
     # $webRequestDevs = Invoke-WebRequest -Uri $hostUrlTestDev -Headers $header -Method GET
+    $webRequestsmartGroups = Invoke-WebRequest -Uri $hostUrlTestSmartGroup -Headers $header -Method GET 
+
+
     ($webRequestsmartGroups.Content | ConvertFrom-Json).DeviceAdditions
 
 
-    $webRequestsmartGroups = Invoke-WebRequest -Uri $hostUrlTestSmartGroup -Headers $header -Method GET 
     $bulkDevice = Invoke-WebRequest -Uri $hostUrlBulkDevice -Headers $header -Method Post -Body (Set-DeviceListJSON -deviceIDs (($webRequestsmartGroups.Content | ConvertFrom-Json).deviceAdditions).Id)
     ($bulkDevice.Content | ConvertFrom-Json).Devices
 
