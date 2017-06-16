@@ -1,0 +1,28 @@
+$query = "SELECT TOP (1000) [c_rowid]
+      ,[c_customerref]
+      ,[c_personref]
+      ,[c_user_ref]
+      ,[c_userid]
+      ,[c_name]
+      ,[c_organization]
+      ,[c_postaddr]
+      ,[c_postaddr2]
+      ,[c_postno]
+      ,[c_city]
+      ,[c_country]
+      ,[c_phone]
+      ,[c_cellular]
+      ,[c_fax]
+      ,[c_email]
+      ,[c_description]
+      ,[c_generic1]
+      ,[c_generic2]
+      ,[c_generic3]
+      ,[c_generic4]
+      ,[c_generic5]
+      ,[c_cancelled]
+      ,[c_change_pwd_next_login]
+  FROM [W3D3].[dbo].[t_citizen_login]"
+
+$w3d3Db = Invoke-Sqlcmd -ServerInstance "srv-w3d3db01" -Database W3D3 -Query $query
+
