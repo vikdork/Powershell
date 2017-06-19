@@ -1,5 +1,7 @@
-﻿[void][System.Reflection.Assembly]::LoadWithPartialName('presentationframework')
-
+﻿#.[void][System.Reflection.Assembly]::LoadWithPartialName('presentationframework')
+Add-Type -Assembly PresentationFramework            
+Add-Type -Assembly PresentationCore
+Add-Type –assemblyName WindowsBase
 [xml]$XAML = @'
 <Window 
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
