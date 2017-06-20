@@ -89,10 +89,16 @@ $xaml.SelectNodes("//*[@Name]") | foreach {Set-Variable -Name ($_.Name) -Value $
                         $webRequestsmartGroups = Invoke-WebRequest -Uri $hostUrlTestSmartGroup -Headers $header -Method GET
                         $bulkDevice = ((Invoke-WebRequest -Uri $hostUrlBulkDevice -Headers $header -Method Post -Body (Set-DeviceListJSON -deviceIDs (($webRequestsmartGroups.Content | ConvertFrom-Json).deviceAdditions).Id)).content | ConvertFrom-Json).devices | Sort-Object AssetNumber -Unique | Where-Object "UserName" -EQ $textBoxAnvändarnNamn.Text
                             
-                            foreach ($device in $bulkDevice)
+                            if ($bulkDevice) {
+                                foreach ($device in $bulkDevice)
                             {
                                 $listBoxResult.Items.Add($device.Assetnumber)
                             }
+                            
+                        }
+                            else {
+                                    $listBoxResult.Items.Add($textBoxAnvändarnNamn.Text + " har inget device")
+                            }                            
                             
                             
                     })
