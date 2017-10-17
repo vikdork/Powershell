@@ -26,7 +26,7 @@ Function Get-BasicUserForAuth {
 
 	Return "Basic " + $encodedString
 }
- $Username = "MeetingsAPI"
+    $Username = "MeetingsAPI"
     $Password = "kallebanan01"
     $APIkey = "YNF9Pz9Frh2C1OKBQEDeEDzojC31sgxalHOa4zTGVXg="
 
@@ -50,17 +50,22 @@ $header = @{"Authorization" = (Get-BasicUserForAuth ($Username + ":" + $Password
     #>
 
    
-    # Gamla test fï¿½r att hï¿½mta alla devices och apps
+    # Gamla test för att hämta alla devices och apps
     # $webRequestApps = Invoke-WebRequest -Uri $hostUrlTestApp -Headers $header -Method GET
     # $webRequestDevs = Invoke-WebRequest -Uri $hostUrlTestDev -Headers $header -Method GET
+    #($webRequestsmartGroups.Content | ConvertFrom-Json).DeviceAdditions
     $webRequestsmartGroups = Invoke-WebRequest -Uri $hostUrlTestSmartGroup -Headers $header -Method GET 
 
 
-    ($webRequestsmartGroups.Content | ConvertFrom-Json).DeviceAdditions
+    
 
 
     $bulkDevice = Invoke-WebRequest -Uri $hostUrlBulkDevice -Headers $header -Method Post -Body (Set-DeviceListJSON -deviceIDs (($webRequestsmartGroups.Content | ConvertFrom-Json).deviceAdditions).Id)
-    ($bulkDevice.Content | ConvertFrom-Json).Devices
+    $devices = ($bulkDevice.Content | ConvertFrom-Json).Devices | Select-Object UserNAme, AssetNumber
+
+    $devices | Export-Csv C:\temp\devices.csv -Encoding UTF8 -Delimiter ";" -NoTypeInformation
+
+
 
 
 
