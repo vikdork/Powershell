@@ -1,0 +1,11 @@
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\ConsoleApp1\ConsoleApp1\bin\Debug\netcoreapp2.0\webclientAndJsonPArser.deps.json
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\ConsoleApp1\ConsoleApp1\bin\Debug\netcoreapp2.0\webclientAndJsonPArser.runtimeconfig.json
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\ConsoleApp1\ConsoleApp1\bin\Debug\netcoreapp2.0\webclientAndJsonPArser.runtimeconfig.dev.json
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\ConsoleApp1\ConsoleApp1\bin\Debug\netcoreapp2.0\webclientAndJsonPArser.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\ConsoleApp1\ConsoleApp1\bin\Debug\netcoreapp2.0\webclientAndJsonPArser.pdb
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\ConsoleApp1\ConsoleApp1\obj\Debug\netcoreapp2.0\webclientAndJsonPArser.csprojResolveAssemblyReference.cache
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\ConsoleApp1\ConsoleApp1\obj\Debug\netcoreapp2.0\webclientAndJsonPArser.csproj.CoreCompileInputs.cache
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\ConsoleApp1\ConsoleApp1\obj\Debug\netcoreapp2.0\webclientAndJsonPArser.AssemblyInfoInputs.cache
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\ConsoleApp1\ConsoleApp1\obj\Debug\netcoreapp2.0\webclientAndJsonPArser.AssemblyInfo.cs
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\ConsoleApp1\ConsoleApp1\obj\Debug\netcoreapp2.0\webclientAndJsonPArser.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\ConsoleApp1\ConsoleApp1\obj\Debug\netcoreapp2.0\webclientAndJsonPArser.pdb
