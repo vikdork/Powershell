@@ -44,8 +44,17 @@ Start-UDDashboard -port $port -Content {
                                 get-avklarade | Out-UDMonitorData
                             } 
                         }
+                    
                     }
-        
+           New-UDRow {
+            New-UDColumn -Size 3 {
+            New-UDCounter -Title "Antal Datorer i domänen" -AutoRefresh -RefreshInterval 20 -Icon hdd @Colors -Endpoint {
+            $date = (Get-Date).AddDays(-180)
+            $computers = get-adcomputer -Filter {PasswordLastSet -gt $date -and Name -notlike '*srv-*'}
+            $computers.count
+        }
+        }
+        }
         
         New-UDRow {
                

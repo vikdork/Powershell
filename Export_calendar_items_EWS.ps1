@@ -7,8 +7,8 @@
 $EWSDLL = "C:\Program Files\Microsoft\Exchange\Web Services\2.2\Microsoft.Exchange.WebServices.dll"
 $MBX = "Kalender.KSF-IT-avdelning-Driftkalender@huddinge.se"
 $EWSURL = "https://srv-exch01/EWS/Exchange.asmx"
-$StartDate = (Get-Date).AddDays(-90)
-$EndDate = (Get-Date)  
+$StartDate = Get-Date -Year 2017 -Month 12 -Day 1
+$EndDate = Get-Date -Year 2017 -Month 12 -Day 31
 
 ## Choose to ignore any SSL Warning issues caused by Self Signed Certificates  
   
@@ -58,6 +58,8 @@ $Recurring = new-object Microsoft.Exchange.WebServices.Data.ExtendedPropertyDefi
 $psPropset= new-object Microsoft.Exchange.WebServices.Data.PropertySet([Microsoft.Exchange.WebServices.Data.BasePropertySet]::FirstClassProperties)  
 $psPropset.Add($Recurring)
 $psPropset.RequestedBodyType = [Microsoft.Exchange.WebServices.Data.BodyType]::Text;
+
+$Global:hej = @()
 
 $RptCollection = @()
 
@@ -119,6 +121,8 @@ $rptObj.Notes = $Item.Body.Text
         $RptCollection[$y] | Add-Member -MemberType NoteProperty -Value ($RptCollection.starttime[$y] |get-date -UFormat %V) -Name "Weekday"
     }
     
-   
+   $Global:hej = $RptCollection
 
 }
+
+$12 = Get-Date -Year 2017 -Month 12

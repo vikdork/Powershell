@@ -664,26 +664,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Viktor\\.nuget\\packages\\": {},
+    "C:\\Users\\viklin\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Viktor\\Documents\\Visual Studio 2017\\Projects\\ConsoleApp1\\ConsoleApp1\\webclientAndJsonPArser.csproj",
+      "projectUniqueName": "c:\\Users\\viklin\\OneDrive\\powershell\\ConsoleApp1\\ConsoleApp1\\webclientAndJsonPArser.csproj",
       "projectName": "webclientAndJsonPArser",
-      "projectPath": "C:\\Users\\Viktor\\Documents\\Visual Studio 2017\\Projects\\ConsoleApp1\\ConsoleApp1\\webclientAndJsonPArser.csproj",
-      "packagesPath": "C:\\Users\\Viktor\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Viktor\\Documents\\Visual Studio 2017\\Projects\\ConsoleApp1\\ConsoleApp1\\obj\\",
+      "projectPath": "c:\\Users\\viklin\\OneDrive\\powershell\\ConsoleApp1\\ConsoleApp1\\webclientAndJsonPArser.csproj",
+      "packagesPath": "C:\\Users\\viklin\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\viklin\\OneDrive\\powershell\\ConsoleApp1\\ConsoleApp1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Viktor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\viklin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -709,7 +706,7 @@
         "dependencies": {
           "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "2.0.0",
+            "version": "[2.0.0, )",
             "autoReferenced": true
           }
         },

@@ -1,58 +1,8 @@
-﻿$port = 8081
-
-Import-Module Sqlps
-$Colors = @{
-    BackgroundColor = "#FF252525"
-    FontColor = "#FFFFFFFF"
-}
-
-
-
-Start-UDDashboard -port $port -Content { 
-    New-UDDashboard  -Title "IT-sektionens Dashboard" -NavBarColor '#FF1c1c1c' -NavBarFontColor "#FF55b3ff" -BackgroundColor "#FF333333" -FontColor "#FFFFFFF" -Content  { 
-        
-        New-UDRow {
-                         New-UDColumn -Size 4 {
-                            New-UDMonitor -Title "Antal otilldelade ärenden"  -Type Line -DataPointHistory 10 -RefreshInterval 60 -BackgroundColor "#FF252525" -FontColor "FFFFFFFF" -ChartBackgroundColor "#E6E9ED" -ChartBorderColor "#052049" -Endpoint  {
-                                 function get-Tilldelade 
-                                 {
-                                  $nilexOtilldeladeQuery = "SELECT COUNT(ID) FROM HELPDESK Where AGARE IS NULL AND STATUSID = 0 AND REGDATUM >= DATEADD(month, -12, GETDATE()) AND ANVANDARE IS NOT NULL"
-                                $sqlOtilldeladeÄrenden = Invoke-Sqlcmd -Server srv-sql03 -Database Nilex_prod -Username sa -Password p45T12Q20pxe -Query $nilexOtilldeladeQuery
-                                     return  $sqlOtilldeladeÄrenden.Column1
-                                 }
-                                 
-                                get-Tilldelade | Out-UDMonitorData
-                            } 
-                        }
-                    
-        
-                    
-                         New-UDColumn -Size 4 {
-                            New-UDMonitor -Title "Antal Avklarade ärenden idag"  -Type Line -DataPointHistory 10 -RefreshInterval 120 -BackgroundColor "#FF252525" -FontColor "FFFFFFFF" -ChartBackgroundColor "#FEF2E9" -ChartBorderColor "#F48024" -Endpoint  {
-                                function get-avklarade 
-                                {
-                                    $nilexAvkaldereQuery = "SELECT COUNT(ID) FROM HELPDESK Where STATUSID = 4 AND SLUTDATUM >= DATEADD(dd, DATEDIFF(dd, 0, getdate()), 0)"
-                                    Start-Sleep -Seconds 3
-                                    $sqlAntalÄrenden = Invoke-Sqlcmd -Server srv-sql03 -Database Nilex_prod -Username sa -Password p45T12Q20pxe -Query $nilexAvkaldereQuery 
+﻿New-UDColumn -Size 6 {
+                New-UDChart -Title "Releaser per vecka" -Type Bar -AutoRefresh -RefreshInterval 7 @Colors -Endpoint {
                                     
-                                    return $sqlAntalÄrenden.Column1  
-                                }
-                                
                             
-                                
-                                
-                                get-avklarade | Out-UDMonitorData
-                            } 
-                        }
-                    }
-        
-        
-        New-UDRow {
-               
-            New-UDColumn -Size 6 {
-                New-UDGrid -Title "Kommande Releaser" @Colors -Headers @("Startar", "Förändring", "Klar") -Properties @("Startar", "Förändring", "Klar") -AutoRefresh -RefreshInterval 10 -Endpoint {
-
-                function get-ReleaseCalendar
+                    function get-ReleaseCalendar
 {
     
 
@@ -62,7 +12,7 @@ $EWSDLL = "C:\Program Files\Microsoft\Exchange\Web Services\2.2\Microsoft.Exchan
 $MBX = "Kalender.KSF-IT-avdelning-Driftkalender@huddinge.se"
 $EWSURL = "https://srv-exch01/EWS/Exchange.asmx"
 $StartDate = (Get-Date).AddDays(-90)
-$EndDate = (Get-Date).AddDays(20)  
+$EndDate = (Get-Date).AddDays(10)  
 
 ## Choose to ignore any SSL Warning issues caused by Self Signed Certificates  
   
@@ -173,38 +123,20 @@ $rptObj.Notes = $Item.Body.Text
     
     return $RptCollection
 } 
-    $date = get-date -UFormat %V
-    $dateNormalFromat= Get-Date
-    $calenderItems = get-ReleaseCalendar | Where-Object {$_.Weekday -eq $date -or $_.Weekday -eq ([int]$date +1) -and $_.notes -like "*Påverkan och Beroenden*" -and $_.endTime -GT $dateNormalFromat}
-        
-                    $issues = @();
-
-                        foreach ($calenderItem in $calenderItems)
-                        {
-                            $issues += [PSCustomObject]@{ "Startar" = $calenderItem.StartTime.ToString() ;  "Förändring" = $calenderItem.subject ;  "Klar" = $calenderItem.EndTime.ToString() }
-                        }
-
-
-          
-                    $issues | Out-UDGridData
+                    
+                    
+                    $RptCollection = get-ReleaseCalendar
+                    $date = get-date -UFormat %V
+                    $dateNormalFromat = get-date
+                    $Releases = @();
+                    $Releases += [PSCustomObject]@{ "AntalReleaserPerVecka" = $date ; "Vecka" = ($RptCollection | where-object {$_.weekday -eq $date -and $_.notes -like "*Påverkan och Beroenden*"}).count }
+                    $Releases += [PSCustomObject]@{ "AntalReleaserPerVecka" = $date -1 ; "Vecka" = ($RptCollection | Where-Object {$_.weekday -eq ($date -1) -and $_.notes -like "*Påverkan och Beroenden*"}).count }
+                    $Releases += [PSCustomObject]@{ "AntalReleaserPerVecka" = $date -2; "Vecka" = ($RptCollection | Where-Object {$_.weekday -eq ($date -2) -and $_.notes -like "*Påverkan och Beroenden*"}).count }
+                    $Releases += [PSCustomObject]@{ "AntalReleaserPerVecka" = $date -3; "Vecka" = ($RptCollection | Where-Object {$_.weekday -eq ($date -3) -and $_.notes -like "*Påverkan och Beroenden*"}).count }
+                    $Releases | Out-UDChartData -LabelProperty "AntalReleaserPerVecka" -Dataset @(
+                        
+                        New-UDChartDataset -DataProperty "Vecka" -Label "Antal Releaser" -BackgroundColor "#803AE8CE" -HoverBackgroundColor "#803AE8CE"
+                    )
                 }
             }
- 
-              
-                
-               
             
-        }
-        
-    }
-}
- 
-
-Start-Process http://localhost:$port
-
-
-
-
-
-
-        
